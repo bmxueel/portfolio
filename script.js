@@ -44,7 +44,7 @@ function renderVideos() {
     card.querySelector("h3").textContent = v.title;
     card.querySelector(".video-play").addEventListener("click", (e) => {
       const frame = e.currentTarget.parentElement;
-      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0"
+      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&controls=0&rel=0&iv_load_policy=3&playsinline=1"
         title="${v.title.replace(/"/g, "&quot;")}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>`;
     });
