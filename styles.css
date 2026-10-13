@@ -482,3 +482,36 @@ a.contact-item:hover { background: var(--accent); }
   .two-col .timeline-card, .two-col .edu-list { flex: 1; }
   .two-col .edu-list { display: flex; flex-direction: column; justify-content: space-between; }
 }
+
+/* Pages I manage */
+.pages-head { margin: 40px 0 16px; }
+.pages-head h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 2px; }
+.pages-head p { font-size: 15px; }
+.pages-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 640px) { .pages-grid { grid-template-columns: repeat(3, 1fr); } }
+.page-card {
+  position: relative;
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px;
+  min-width: 0;
+  transition: transform .3s ease, border-color .3s, box-shadow .3s;
+}
+.page-card:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--hue) 45%, var(--border));
+  box-shadow: 0 10px 28px -12px color-mix(in srgb, var(--hue) 40%, transparent);
+}
+.page-icon {
+  display: grid; place-items: center;
+  width: 44px; height: 44px; flex-shrink: 0;
+  border-radius: 12px;
+  color: var(--hue);
+  background: color-mix(in srgb, var(--hue) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hue) 30%, transparent);
+}
+.page-icon svg { width: 22px; height: 22px; }
+.page-body { display: flex; flex-direction: column; min-width: 0; }
+.page-name { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.page-meta { font-size: 13px; color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.page-arrow { margin-left: auto; color: var(--muted-foreground); transition: color .2s, transform .2s; }
+.page-card:hover .page-arrow { color: var(--foreground); transform: translate(2px, -2px); }
