@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <script>
-    // Apply saved theme before paint to avoid a flash
+    // Dark by default; apply saved theme before paint to avoid a flash
     try {
       var t = localStorage.getItem("theme");
       if (t) document.documentElement.setAttribute("data-theme", t);
@@ -265,7 +265,7 @@
     <!-- Contact -->
     <section id="contact" class="section container">
       <div class="card cta">
-        <p class="eyebrow">Contact</p>
+        <p class="eyebrow eyebrow-success">Contact</p>
         <h2>Let's grow your brand</h2>
         <p class="muted">I'm looking for a Social Media Manager role. Email, call or message me on WhatsApp.</p>
         <div class="contact-grid">
