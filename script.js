@@ -21,7 +21,7 @@ function renderVideos() {
     const id = youtubeId(v.url);
     if (!id) return;
     const card = document.createElement("article");
-    card.className = "card video-card reveal";
+    card.className = "card video-card";
     card.innerHTML = `
       <div class="video-frame">
         <button class="video-play" aria-label="Play: ${v.title}">
@@ -83,18 +83,41 @@ function setupCopy() {
   });
 }
 
-// Reveal-on-scroll
+// Reveal-on-scroll, staggered among siblings
+const REVEAL_TARGETS = [
+  ".section-head > *",
+  ".video-card",
+  ".page-card",
+  ".skill",
+  ".col-title",
+  ".timeline-card",
+  ".checklist li",
+  ".edu",
+  ".cta > *:not(.contact-grid)",
+  ".contact-item",
+  ".footer-inner > *",
+].join(", ");
+
 function setupReveal() {
-  document.querySelectorAll(".section-head, .skill, .timeline-card, .edu-list, .cta, .stat")
-    .forEach((el) => el.classList.add("reveal"));
-  const els = document.querySelectorAll(".reveal");
+  const els = [...document.querySelectorAll(REVEAL_TARGETS)];
+  els.forEach((el) => el.classList.add("reveal"));
   if (!("IntersectionObserver" in window)) {
-    els.forEach((el) => el.classList.add("in"));
+    els.forEach((el) => el.classList.remove("reveal"));
     return;
   }
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    // Stagger the elements that enter view together
+    const visible = entries.filter((e) => e.isIntersecting).map((e) => e.target);
+    visible.forEach((el, i) => {
+      io.unobserve(el);
+      const delay = Math.min(i, 6) * 90;
+      el.style.transitionDelay = delay + "ms";
+      el.classList.add("in");
+      // Hand transitions back to the component (hover effects) once revealed
+      setTimeout(() => {
+        el.classList.remove("reveal", "in");
+        el.style.transitionDelay = "";
+      }, delay + 800);
     });
   }, { threshold: 0.1 });
   els.forEach((el) => io.observe(el));

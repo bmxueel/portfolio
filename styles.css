@@ -477,12 +477,36 @@ a.contact-item:hover { background: var(--accent); }
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
-/* Reveal on scroll */
-.reveal { opacity: 0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* Motion */
+:root { --ease-out: cubic-bezier(.2, .7, .2, 1); }
+
+/* Hero: staggered entrance on load */
+.hero h1 .line { display: block; }
+.anim {
+  animation: fade-up .8s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+/* Nav fades in */
+.nav { animation: fade-in .6s ease both; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+/* Reveal on scroll (html prefix beats component transitions while revealing) */
+html .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .7s var(--ease-out), transform .7s var(--ease-out);
+}
+html .reveal.in { opacity: 1; transform: none; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .anim, .nav { animation: none; }
+  html .reveal { opacity: 1; transform: none; transition: none; }
 }
 .skill-tall .timeline { flex: 1; align-content: center; gap: 8px; min-height: 140px; }
 .skill-tall .track { height: 22px; }
