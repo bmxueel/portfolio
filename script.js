@@ -4,8 +4,9 @@
 // ============================================================
 const VIDEOS = [
   { title: "Video Project 1", tag: "Long-form", url: "https://www.youtube.com/watch?v=LMiDBZ54P9Q" },
-  { title: "Video Project 2", tag: "Long-form", url: "https://www.youtube.com/watch?v=khD2tmFBD_I" },
-  { title: "Video Project 3", tag: "Short", url: "https://www.youtube.com/shorts/RTlX65xb7Pg" },
+  { title: "Video Project 2", tag: "Long-form", url: "https://www.youtube.com/watch?v=81CasDJm0lc" },
+  { title: "Video Project 3", tag: "Long-form", url: "https://www.youtube.com/watch?v=khD2tmFBD_I" },
+  { title: "Video Project 4", tag: "Short", url: "https://www.youtube.com/shorts/RTlX65xb7Pg" },
 ];
 
 function youtubeId(url) {

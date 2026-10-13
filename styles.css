@@ -520,7 +520,7 @@ html .reveal.in { opacity: 1; transform: none; }
 }
 
 /* Pages I manage */
-.pages-head { margin-top: 72px; }
+.subsection-head { margin-top: 72px; }
 .pages-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 @media (min-width: 640px) { .pages-grid { grid-template-columns: repeat(3, 1fr); } }
 .page-card {
