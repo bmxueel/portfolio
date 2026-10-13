@@ -205,7 +205,6 @@ h1, h2, h3, h4, p { margin: 0; }
 .section { padding-top: 72px; padding-bottom: 8px; }
 .section-head { margin-bottom: 28px; }
 .eyebrow {
-  --eb: #7c3aed;
   display: inline-flex; align-items: center; gap: 8px;
   padding: 4px 12px 4px 10px;
   border-radius: 999px;
@@ -214,20 +213,15 @@ h1, h2, h3, h4, p { margin: 0; }
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--eb);
-  background: color-mix(in srgb, var(--eb) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--eb) 28%, transparent);
+  color: var(--foreground);
+  background: var(--muted);
+  border: 1px solid var(--border);
   margin-bottom: 14px;
 }
 .eyebrow::before {
   content: "";
   width: 6px; height: 6px; border-radius: 50%;
   background: currentColor;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--eb) 22%, transparent);
-}
-:root[data-theme="dark"] .eyebrow { --eb: #a78bfa; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .eyebrow { --eb: #a78bfa; }
 }
 .section h2 {
   font-size: clamp(1.5rem, 3.5vw, 2rem);
