@@ -536,3 +536,6 @@ a.contact-item:hover { background: var(--accent); }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .eyebrow-success { color: #4ade80; background: #052e16; border-color: #14532d; }
 }
+
+/* Deeper grey for the muted parts of the hero headline */
+.hero h1 .muted { color: #71717a; }
