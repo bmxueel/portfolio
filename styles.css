@@ -484,9 +484,7 @@ a.contact-item:hover { background: var(--accent); }
 }
 
 /* Pages I manage */
-.pages-head { margin: 40px 0 16px; }
-.pages-head h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 2px; }
-.pages-head p { font-size: 15px; }
+.pages-head { margin-top: 72px; }
 .pages-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 @media (min-width: 640px) { .pages-grid { grid-template-columns: repeat(3, 1fr); } }
 .page-card {
