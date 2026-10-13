@@ -2,7 +2,15 @@
 
 Portfolio site for BM Alimuzzaman, social media manager and video editor.
 
-Plain HTML, CSS and JS with no build step. It's hosted on Vercel.
+Plain HTML, CSS and JS with no build step and no dependencies. It's hosted on Vercel.
+
+## Run locally
+
+```bash
+npm run dev
+```
+
+Then open http://localhost:5173. You need Node.js but not `npm install`.
 
 ## Editing
 
