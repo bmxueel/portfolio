@@ -568,3 +568,11 @@ html .reveal.in { opacity: 1; transform: none; }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .hero h1 .muted { color: #71717a; }
 }
+
+/* Vertical thumbnails: sharp image centred over a blurred copy */
+.video-frame img.thumb.contain { object-fit: contain; z-index: 0; }
+.video-frame img.thumb-bg {
+  filter: blur(24px) brightness(.55) saturate(1.2);
+  transform: scale(1.25);
+}
+.video-play:hover img.thumb-bg { transform: scale(1.3); }

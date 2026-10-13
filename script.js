@@ -13,6 +13,78 @@ function youtubeId(url) {
   return m ? m[1] : null;
 }
 
+// ---- Thumbnails: crop YouTube's black bars so every card fills its frame ----
+function loadImage(url) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => (img.naturalWidth > 120 ? resolve(img) : reject()); // 120px = "not found" placeholder
+    img.onerror = reject;
+    img.src = url;
+  });
+}
+
+async function firstImage(urls) {
+  for (const url of urls) {
+    try { return await loadImage(url); } catch (e) {}
+  }
+  return null;
+}
+
+// Find the area of the image that isn't black bars
+function contentBox(img) {
+  const w = 160, h = Math.round((img.naturalHeight / img.naturalWidth) * w);
+  const c = document.createElement("canvas");
+  c.width = w; c.height = h;
+  const ctx = c.getContext("2d", { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, w, h);
+  const px = ctx.getImageData(0, 0, w, h).data;
+  const dark = (x0, y0, x1, y1) => {
+    for (let y = y0; y < y1; y++)
+      for (let x = x0; x < x1; x++) {
+        const i = (y * w + x) * 4;
+        if (px[i] > 28 || px[i + 1] > 28 || px[i + 2] > 28) return false;
+      }
+    return true;
+  };
+  let l = 0, r = w, t = 0, b = h;
+  while (l < w / 2 && dark(l, 0, l + 1, h)) l++;
+  while (r > w / 2 && dark(r - 1, 0, r, h)) r--;
+  while (t < h / 2 && dark(l, t, r, t + 1)) t++;
+  while (b > h / 2 && dark(l, b - 1, r, b)) b--;
+  if (r - l < w * 0.2 || b - t < h * 0.2) return null; // mostly black frame: leave it alone
+  const k = img.naturalWidth / w;
+  return { x: l * k, y: t * k, w: (r - l) * k, h: (b - t) * k };
+}
+
+async function enhanceThumb(card, id, isShort) {
+  const base = "https://i.ytimg.com/vi/" + id + "/";
+  const urls = (isShort ? ["oar2.jpg"] : []).concat(["maxresdefault.jpg", "hq720.jpg", "hqdefault.jpg"]);
+  const img = await firstImage(urls.map((u) => base + u));
+  if (!img) return;
+  let src = img.src;
+  let aspect = img.naturalWidth / img.naturalHeight;
+  try {
+    const box = contentBox(img);
+    if (box) {
+      const c = document.createElement("canvas");
+      c.width = Math.round(box.w); c.height = Math.round(box.h);
+      c.getContext("2d").drawImage(img, box.x, box.y, box.w, box.h, 0, 0, c.width, c.height);
+      src = c.toDataURL("image/jpeg", 0.9);
+      aspect = box.w / box.h;
+    }
+  } catch (e) {
+    // Canvas blocked: use the uncropped image
+  }
+  const thumb = card.querySelector(".thumb");
+  const bg = card.querySelector(".thumb-bg");
+  thumb.src = src;
+  const wide = aspect >= 1.6;
+  thumb.classList.toggle("contain", !wide);
+  bg.hidden = wide;
+  if (!wide) bg.src = src;
+}
+
 function renderVideos() {
   const grid = document.getElementById("video-grid");
   grid.innerHTML = "";
@@ -27,7 +99,8 @@ function renderVideos() {
     card.innerHTML = `
       <div class="video-frame">
         <button class="video-play" aria-label="Play: ${v.title}">
-          <img src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" loading="lazy" />
+          <img class="thumb-bg" alt="" hidden />
+          <img class="thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" />
           <span class="play-btn"><svg class="icon" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
         </button>
       </div>
@@ -49,6 +122,7 @@ function renderVideos() {
         allowfullscreen></iframe>`;
     });
     grid.appendChild(card);
+    enhanceThumb(card, id, v.url.includes("/shorts/"));
   });
 }
 
