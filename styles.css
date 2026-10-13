@@ -420,6 +420,20 @@ h1, h2, h3, h4, p { margin: 0; }
 .edu > div { flex: 1; min-width: 0; }
 .edu h4, .edu p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .edu .badge { flex-shrink: 0; }
+/* Date + video tag pills: soft blue tint */
+.timeline-head .badge, .edu .badge, .video-meta .badge { color: #1d4ed8; background: #eff6ff; border-color: #bfdbfe; }
+:root[data-theme="dark"] .timeline-head .badge,
+:root[data-theme="dark"] .edu .badge,
+:root[data-theme="dark"] .video-meta .badge { color: #93c5fd; background: #0c1a33; border-color: #1e3a8a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .timeline-head .badge,
+  :root:not([data-theme="light"]) .edu .badge,
+  :root:not([data-theme="light"]) .video-meta .badge { color: #93c5fd; background: #0c1a33; border-color: #1e3a8a; }
+}
+/* Phones: show the experience dates above the job title */
+@media (max-width: 639px) {
+  .timeline-head { flex-direction: column-reverse; gap: 10px; }
+}
 .checklist { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
 .checklist li { position: relative; padding-left: 26px; font-size: 15px; }
 .checklist li::before {
