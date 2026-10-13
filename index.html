@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BM Alimuzzaman — Social Media Manager</title>
+  <meta name="description" content="BM Alimuzzaman — Social media manager and video editor based in Gazipur, Bangladesh. Content strategy, short-form video, and digital operations." />
+  <meta property="og:title" content="BM Alimuzzaman — Social Media Manager" />
+  <meta property="og:description" content="Social media management, video editing and digital operations." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#09090b" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    // Apply saved theme before paint to avoid a flash
+    try {
+      var t = localStorage.getItem("theme");
+      if (t) document.documentElement.setAttribute("data-theme", t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="brand">
+        <span class="brand-mark">BM</span>
+        <span class="brand-name">bmxueel</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn btn-ghost btn-icon" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon icon-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <a href="mailto:bm.xueel@gmail.com" class="btn btn-primary btn-sm hide-sm">Hire me</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero container">
+      <div class="badge badge-outline">
+        <span class="dot"></span> Open to Social Media Manager roles
+      </div>
+      <h1>
+        Hi, I'm BM Alimuzzaman.<br />
+        <span class="muted">I build brands one post, reel and story at a time.</span>
+      </h1>
+      <p class="lead">
+        Social media manager and video editor from Gazipur, Bangladesh. I plan content,
+        edit scroll-stopping videos, and keep the day-to-day of a digital brand running
+        smoothly. My psychology degree helps me understand what makes audiences engage.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary">
+          View my work
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-outline">Get in touch</a>
+      </div>
+
+      <div class="stats">
+        <div class="card stat">
+          <div class="stat-value">1 yr</div>
+          <div class="stat-label">Digital ops at an e-commerce brand</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-value">BSc</div>
+          <div class="stat-label">Psychology: audience insight</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-value">3-in-1</div>
+          <div class="stat-label">Social, video &amp; basic web</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work -->
+    <section id="work" class="section container">
+      <div class="section-head">
+        <p class="eyebrow">Portfolio</p>
+        <h2>Selected video work</h2>
+        <p class="muted">A few edits I've produced. Click any video to play it here.</p>
+      </div>
+      <div class="video-grid" id="video-grid">
+        <!-- Rendered from the VIDEOS list in script.js -->
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="section container">
+      <div class="section-head">
+        <p class="eyebrow">What I do</p>
+        <h2>Skills &amp; services</h2>
+      </div>
+      <div class="skills-grid">
+        <div class="card skill">
+          <div class="skill-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+          </div>
+          <h3>Social Media Management</h3>
+          <p class="muted">Content calendars, captions, posting schedules and community engagement across Facebook, Instagram, YouTube and TikTok.</p>
+          <div class="tags">
+            <span class="badge">Content planning</span>
+            <span class="badge">Copywriting</span>
+            <span class="badge">Community</span>
+          </div>
+        </div>
+        <div class="card skill">
+          <div class="skill-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="m16 13 5.2 3.5a.5.5 0 0 0 .8-.4V7.9a.5.5 0 0 0-.8-.4L16 11"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>
+          </div>
+          <h3>Video Editing</h3>
+          <p class="muted">Short-form reels, YouTube edits, cuts, transitions, captions and music. Videos made for the platform they're posted on.</p>
+          <div class="tags">
+            <span class="badge">Reels &amp; Shorts</span>
+            <span class="badge">YouTube</span>
+            <span class="badge">Motion text</span>
+          </div>
+        </div>
+        <div class="card skill">
+          <div class="skill-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </div>
+          <h3>Reporting &amp; Operations</h3>
+          <p class="muted">Daily sales reports, stock tracking and order flow. I'm comfortable with numbers and keep the details organised.</p>
+          <div class="tags">
+            <span class="badge">Daily reports</span>
+            <span class="badge">Inventory</span>
+            <span class="badge">QC</span>
+          </div>
+        </div>
+        <div class="card skill">
+          <div class="skill-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+          </div>
+          <h3>Basic Web Development</h3>
+          <p class="muted">HTML and CSS for landing pages, link-in-bio pages and quick website updates. I built this site myself.</p>
+          <div class="tags">
+            <span class="badge">HTML</span>
+            <span class="badge">CSS</span>
+            <span class="badge">Landing pages</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience + Education -->
+    <section id="experience" class="section container">
+      <div class="section-head">
+        <p class="eyebrow">Background</p>
+        <h2>Experience &amp; education</h2>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3 class="col-title">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            Experience
+          </h3>
+          <div class="card timeline-card">
+            <div class="timeline-head">
+              <div>
+                <h4>Digital Operations Manager</h4>
+                <p class="muted">NEXF Lifestyle Limited · Dhaka</p>
+              </div>
+              <span class="badge badge-outline mono">Mar 2023 – Feb 2024</span>
+            </div>
+            <ul class="checklist">
+              <li>Managed incoming online orders from confirmation through dispatch</li>
+              <li>Ran product quality checks before packaging</li>
+              <li>Created shipment entries on courier platforms</li>
+              <li>Kept product stock levels updated across channels</li>
+              <li>Prepared daily sales reports for management</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="col-title">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            Education
+          </h3>
+          <div class="card edu-list">
+            <div class="edu">
+              <div>
+                <h4>BSc in Psychology</h4>
+                <p class="muted">Kazi Azimuddin College, Gazipur</p>
+              </div>
+              <span class="badge badge-outline mono">Session 2015–16</span>
+            </div>
+            <div class="separator"></div>
+            <div class="edu">
+              <div>
+                <h4>HSC, Business Studies</h4>
+                <p class="muted">Gazipur Cantonment Board College</p>
+              </div>
+              <span class="badge badge-outline mono">2014</span>
+            </div>
+            <div class="separator"></div>
+            <div class="edu">
+              <div>
+                <h4>SSC, Business Studies</h4>
+                <p class="muted">Gazipur Cantonment Board High School</p>
+              </div>
+              <span class="badge badge-outline mono">2012</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section container">
+      <div class="card cta">
+        <p class="eyebrow">Contact</p>
+        <h2>Let's grow your brand together.</h2>
+        <p class="muted">I'm looking for a Social Media Manager role. Email, call or message me on WhatsApp.</p>
+        <div class="contact-grid">
+          <a class="contact-item" href="mailto:bm.xueel@gmail.com">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            <span>bm.xueel@gmail.com</span>
+          </a>
+          <a class="contact-item" href="tel:+8801913013231">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+            <span>+880 1913-013231</span>
+          </a>
+          <a class="contact-item" href="https://wa.me/8801913013231" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            <span>WhatsApp</span>
+          </a>
+          <div class="contact-item static">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Gazipur, Bangladesh</span>
+          </div>
+        </div>
+        <div class="hero-actions center">
+          <a href="mailto:bm.xueel@gmail.com?subject=Social%20Media%20Manager%20opportunity" class="btn btn-primary">
+            Send an email
+            <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button class="btn btn-outline" id="copy-email">
+            <svg class="icon" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy email</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p class="muted">© <span id="year"></span> BM Alimuzzaman</p>
+      <a href="#top" class="muted">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
