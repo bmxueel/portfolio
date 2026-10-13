@@ -233,6 +233,7 @@ h1, h2, h3, h4, p { margin: 0; }
 /* Videos */
 .video-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
 @media (min-width: 640px) { .video-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .video-grid.three-up { grid-template-columns: repeat(3, 1fr); } }
 .video-card { overflow: hidden; display: flex; flex-direction: column; }
 .video-frame {
   position: relative;

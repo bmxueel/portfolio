@@ -3,10 +3,9 @@
 // Paste any YouTube link (watch, youtu.be or shorts) as `url`.
 // ============================================================
 const VIDEOS = [
-  { title: "Video Project 1", tag: "Video edit", url: "https://www.youtube.com/watch?v=8of5w7RgcTc" },
-  { title: "Video Project 2", tag: "Video edit", url: "https://www.youtube.com/watch?v=50VNCymT-Cs" },
-  { title: "Video Project 3", tag: "Video edit", url: "https://www.youtube.com/watch?v=xEALTVLxrDw" },
-  { title: "Video Project 4", tag: "Video edit", url: "https://www.youtube.com/watch?v=YxJjFjP0cr" },
+  { title: "Video Project 1", tag: "Long-form", url: "https://www.youtube.com/watch?v=LMiDBZ54P9Q" },
+  { title: "Video Project 2", tag: "Long-form", url: "https://www.youtube.com/watch?v=khD2tmFBD_I" },
+  { title: "Video Project 3", tag: "Short", url: "https://www.youtube.com/shorts/RTlX65xb7Pg" },
 ];
 
 function youtubeId(url) {
@@ -17,6 +16,9 @@ function youtubeId(url) {
 function renderVideos() {
   const grid = document.getElementById("video-grid");
   grid.innerHTML = "";
+  // 3 per row on desktop, except 4 (and 1-2) videos, which look better as 2 per row
+  const n = VIDEOS.length;
+  grid.classList.toggle("three-up", !(n === 4 || n <= 2));
   VIDEOS.forEach((v) => {
     const id = youtubeId(v.url);
     if (!id) return;
