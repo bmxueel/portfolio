@@ -286,6 +286,12 @@ h1, h2, h3, h4, p { margin: 0; }
 }
 .skill-icon .icon { width: 20px; height: 20px; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.tags .badge {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
 
 /* Experience / education */
 .two-col { display: grid; grid-template-columns: 1fr; gap: 28px; }
