@@ -483,6 +483,7 @@ a.contact-item:hover { background: var(--accent); }
 
 /* Hero: staggered entrance on load */
 .hero h1 .line { display: block; }
+.nowrap { white-space: nowrap; }
 .anim {
   animation: fade-up .8s var(--ease-out) both;
   animation-delay: calc(var(--i, 0) * 90ms + 80ms);
