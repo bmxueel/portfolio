@@ -538,4 +538,8 @@ a.contact-item:hover { background: var(--accent); }
 }
 
 /* Deeper grey for the muted parts of the hero headline */
-.hero h1 .muted { color: #71717a; }
+.hero h1 .muted { color: #a1a1aa; }
+:root[data-theme="dark"] .hero h1 .muted { color: #71717a; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero h1 .muted { color: #71717a; }
+}
