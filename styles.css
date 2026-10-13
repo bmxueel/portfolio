@@ -475,3 +475,10 @@ a.contact-item:hover { background: var(--accent); }
 }
 .skill-tall .timeline { flex: 1; align-content: center; gap: 8px; min-height: 140px; }
 .skill-tall .track { height: 22px; }
+
+/* Equal-height experience / education cards on desktop */
+@media (min-width: 860px) {
+  .two-col > div { display: flex; flex-direction: column; }
+  .two-col .timeline-card, .two-col .edu-list { flex: 1; }
+  .two-col .edu-list { display: flex; flex-direction: column; justify-content: space-between; }
+}
