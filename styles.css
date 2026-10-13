@@ -524,3 +524,15 @@ a.contact-item:hover { background: var(--accent); }
 .page-meta { font-size: 13px; color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .page-arrow { margin-left: auto; color: var(--muted-foreground); transition: color .2s, transform .2s; }
 .page-card:hover .page-arrow { color: var(--foreground); transform: translate(2px, -2px); }
+
+/* Green status pill (hero) */
+.eyebrow-success {
+  color: #15803d;
+  background: #dcfce7;
+  border-color: #bbf7d0;
+  margin-bottom: 0;
+}
+:root[data-theme="dark"] .eyebrow-success { color: #4ade80; background: #052e16; border-color: #14532d; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .eyebrow-success { color: #4ade80; background: #052e16; border-color: #14532d; }
+}
