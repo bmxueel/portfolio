@@ -200,10 +200,11 @@ function setupReveal() {
   els.forEach((el) => io.observe(el));
 }
 
-// Hero name: each letter rolls upward through random capitals and settles, left to right
+// Hero name: each letter rolls upward through random capitals and settles, left to right.
+// Resolves once the whole name has settled.
 function setupMatrixName() {
   const el = document.querySelector(".matrix");
-  if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return Promise.resolve();
   const text = el.dataset.text;
 
   // Screen readers get the plain name; the animated copy is hidden from them
@@ -237,6 +238,7 @@ function setupMatrixName() {
   const capW = probe.firstChild.getBoundingClientRect().width;
   probe.remove();
 
+  const rolls = [];
   chars.forEach((ch, i) => {
     const c = ch.firstChild.textContent;
     if (c === " ") return;
@@ -266,7 +268,67 @@ function setupMatrixName() {
       reel.remove();
       ch.classList.replace("rolling", "settled");
     };
+    rolls.push(roll.finished);
   });
+  return Promise.all(rolls);
+}
+
+// Hero: cycle "I grow brands on ___" through platform names, starting once `ready` resolves
+function setupRotator(ready) {
+  const el = document.querySelector(".rotator");
+  if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const words = el.dataset.words.split("|");
+
+  // Screen readers keep the original phrase; the rotating copy is hidden from them
+  const sr = document.createElement("span");
+  sr.className = "sr-only";
+  sr.textContent = words[0];
+  const box = document.createElement("span");
+  box.className = "rot-box";
+  box.setAttribute("aria-hidden", "true");
+  const makeWord = (text) => {
+    const w = document.createElement("span");
+    w.className = "rot-word";
+    w.textContent = text;
+    return w;
+  };
+  let current = makeWord(words[0]);
+  box.appendChild(current);
+  el.replaceChildren(sr, box);
+
+  // The box width follows the current word so the line doesn't leave a gap
+  const fit = () => { box.style.width = current.getBoundingClientRect().width + "px"; };
+  fit();
+  document.fonts?.ready.then(fit);
+  window.addEventListener("resize", fit);
+
+  const easing = "cubic-bezier(.2, .7, .2, 1)";
+  let i = 0;
+  const swap = () => {
+    i = (i + 1) % words.length;
+    const next = makeWord(words[i]);
+    next.classList.add("incoming");
+    box.appendChild(next);
+    box.style.width = next.getBoundingClientRect().width + "px";
+
+    const old = current;
+    old.animate(
+      [{ transform: "none", opacity: 1 }, { transform: "translateY(-100%)", opacity: 0 }],
+      { duration: 450, easing, fill: "forwards" }
+    );
+    next.animate(
+      [{ transform: "translateY(100%)", opacity: 0 }, { transform: "none", opacity: 1 }],
+      { duration: 450, easing }
+    ).onfinish = () => {
+      old.remove();
+      next.classList.remove("incoming");
+    };
+    current = next;
+  };
+  ready.then(() => setTimeout(() => {
+    swap();
+    setInterval(swap, 2200);
+  }, 1000));
 }
 
 document.getElementById("year").textContent = new Date().getFullYear();
@@ -274,4 +336,4 @@ renderVideos();
 setupTheme();
 setupCopy();
 setupReveal();
-setupMatrixName();
+setupRotator(setupMatrixName());

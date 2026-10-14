@@ -187,7 +187,7 @@ p.muted { color: var(--subtext); }
 }
 
 /* Hero */
-.hero { padding-top: 72px; padding-bottom: 32px; }
+.hero { padding-top: 72px; padding-bottom: 8px; } /* + .section padding-top = 80px, same gap as other sections */
 .hero h1 {
   margin-top: 20px;
   font-size: clamp(2rem, 6vw, 3.5rem);
@@ -551,7 +551,7 @@ html .reveal.in { opacity: 1; transform: none; }
 }
 
 /* Pages I manage */
-.pages-head { margin-top: 72px; }
+.pages-head { margin-top: 80px; }
 .pages-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
 @media (min-width: 640px) { .pages-grid { grid-template-columns: repeat(3, 1fr); } }
 .page-card {
@@ -610,10 +610,13 @@ html .reveal.in { opacity: 1; transform: none; }
 
 /* Hero name: each letter rolls upward through random capitals, then settles */
 .matrix { white-space: nowrap; }
+/* Keep the browser from anchoring scroll to the animating hero (page loaded slightly scrolled) */
+.hero { overflow-anchor: none; }
 .matrix .mx-ch {
-  position: relative; display: inline-block; white-space: pre;
-  overflow-x: visible; overflow-y: clip; vertical-align: bottom;
+  position: relative; display: inline-block; white-space: pre; vertical-align: bottom;
 }
+/* hidden (not clip) so the tall reel never adds to the page's scroll height */
+.matrix .mx-ch.rolling { overflow: hidden; }
 .matrix .mx-ch.rolling .mx-final { visibility: hidden; }
 .matrix .mx-reel { position: absolute; top: 0; left: 0; right: 0; will-change: transform; }
 .matrix .mx-reel span { display: block; text-align: center; }
@@ -631,4 +634,17 @@ html .reveal.in { opacity: 1; transform: none; }
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
   overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* Hero: platform name that rotates in "I grow brands on ___." */
+.rotator .rot-box {
+  position: relative; display: inline-block; vertical-align: bottom;
+  overflow-x: visible; overflow-y: clip;
+  transition: width .45s var(--ease-out);
+}
+.rotator .rot-word { display: inline-block; white-space: nowrap; color: var(--foreground); }
+.rotator .rot-word.incoming { position: absolute; left: 0; top: 0; }
+/* On mobile the platform name always sits on its own line, whatever its length */
+@media (max-width: 639px) {
+  .hero h1 .rot-line { display: block; }
 }
