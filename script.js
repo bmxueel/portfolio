@@ -140,26 +140,6 @@ function setupTheme() {
   });
 }
 
-// Toast + copy email
-function toast(msg) {
-  const el = document.getElementById("toast");
-  el.textContent = msg;
-  el.classList.add("show");
-  clearTimeout(toast._t);
-  toast._t = setTimeout(() => el.classList.remove("show"), 2000);
-}
-
-function setupCopy() {
-  document.getElementById("copy-email").addEventListener("click", async () => {
-    try {
-      await navigator.clipboard.writeText("bm.xueel@gmail.com");
-      toast("Email copied to clipboard");
-    } catch (e) {
-      toast("bm.xueel@gmail.com");
-    }
-  });
-}
-
 // Reveal-on-scroll, staggered among siblings
 const REVEAL_TARGETS = [
   ".section-head > *",
@@ -225,32 +205,35 @@ function setupMatrixName() {
   });
   el.replaceChildren(sr, visual);
 
-  const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const randomLetter = () => LETTERS[Math.floor(Math.random() * LETTERS.length)];
   const duration = (i) => 900 + i * 130; // ms until letter i settles
 
-  // Capitals are wider than letters like "i" or "."; squeeze them to fit each slot
+  // Measure every capital so each slot only rolls letters that fit its width (no squeezing)
   const probe = document.createElement("span");
   probe.className = "mx-reel";
-  probe.innerHTML = "<span>W</span><span></span>";
+  probe.innerHTML = "<span></span><span></span>";
   probe.style.cssText = "visibility:hidden;right:auto";
   chars[0].appendChild(probe);
-  const capW = probe.firstChild.getBoundingClientRect().width;
+  const capWidths = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].map((L) => {
+    probe.firstChild.textContent = L;
+    return [L, probe.firstChild.getBoundingClientRect().width];
+  });
   probe.remove();
+  const narrowest = capWidths.reduce((a, b) => (b[1] < a[1] ? b : a))[0];
 
   const rolls = [];
   chars.forEach((ch, i) => {
     const c = ch.firstChild.textContent;
     if (c === " ") return;
-    const fit = Math.min(1, ch.firstChild.getBoundingClientRect().width / capW);
+    const slotW = ch.firstChild.getBoundingClientRect().width;
+    const fits = capWidths.filter(([, w]) => w <= slotW * 1.04).map(([L]) => L);
+    const pool = fits.length ? fits : [narrowest]; // "i", "l", "." roll the slimmest capital
     const steps = Math.round(duration(i) / 90); // letters that roll past before settling
 
     const reel = document.createElement("span");
     reel.className = "mx-reel";
     for (let k = 0; k < steps; k++) {
       const s = document.createElement("span");
-      s.textContent = randomLetter();
-      s.style.setProperty("--sx", fit.toFixed(3));
+      s.textContent = pool[Math.floor(Math.random() * pool.length)];
       reel.appendChild(s);
     }
     const last = document.createElement("span");
@@ -334,6 +317,5 @@ function setupRotator(ready) {
 document.getElementById("year").textContent = new Date().getFullYear();
 renderVideos();
 setupTheme();
-setupCopy();
 setupReveal();
 setupRotator(setupMatrixName());

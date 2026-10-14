@@ -334,7 +334,7 @@ p.muted { color: var(--subtext); }
   color: var(--muted-foreground);
 }
 .skill h3 { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; }
-.skill-feature h3 { font-size: 22px; }
+@media (min-width: 640px) { .skill-feature h3 { font-size: 22px; } }
 .skill p { font-size: 15px; }
 .skill-feature p { max-width: 520px; }
 .skill-icon {
@@ -470,14 +470,11 @@ p.muted { color: var(--subtext); }
   margin-top: 28px;
 }
 @media (min-width: 640px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
-/* Phones: contact buttons span the grid width, split in two equal halves */
-@media (max-width: 639px) {
-  .cta .hero-actions { display: grid; grid-template-columns: 1fr 1fr; width: 100%; max-width: 640px; gap: 10px; }
-}
 .contact-item {
   display: flex; align-items: center; gap: 10px;
   padding: 12px 14px;
   border: 1px solid var(--border);
+  background: var(--muted);
   border-radius: calc(var(--radius) - 2px);
   font-size: 14px;
   text-align: left;
@@ -494,19 +491,6 @@ a.contact-item:hover, .contact-item.static:hover { background: var(--accent); }
 .footer-inner { display: flex; justify-content: space-between; align-items: center; height: 64px; font-size: 14px; }
 .footer a:hover { color: var(--foreground); }
 
-/* Toast */
-.toast {
-  position: fixed; left: 50%; bottom: 24px;
-  transform: translate(-50%, 16px);
-  padding: 10px 16px;
-  border-radius: calc(var(--radius) - 2px);
-  background: var(--primary); color: var(--primary-foreground);
-  font-size: 14px; font-weight: 500;
-  opacity: 0; pointer-events: none;
-  transition: opacity .2s, transform .2s;
-  z-index: 100;
-}
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* Motion */
 :root { --ease-out: cubic-bezier(.2, .7, .2, 1); }
@@ -621,10 +605,7 @@ html .reveal.in { opacity: 1; transform: none; }
 .matrix .mx-reel { position: absolute; top: 0; left: 0; right: 0; will-change: transform; }
 .matrix .mx-reel span { display: block; text-align: center; }
 .matrix .mx-reel span:not(:last-child) {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-weight: 600;
   color: var(--success);
-  transform: scaleX(var(--sx, 1)); /* squeezed by script to fit narrow letters */
 }
 .matrix .mx-ch.settled .mx-final { animation: mx-settle .5s ease-out; }
 @keyframes mx-settle {
