@@ -278,7 +278,7 @@ p.muted { color: var(--subtext); }
   box-shadow: 0 8px 24px rgba(0,0,0,.25);
   transition: transform .2s;
 }
-.play-btn svg { width: 20px; height: 20px; fill: currentColor; stroke: none; margin-left: 3px; }
+.play-btn svg { width: 20px; height: 20px; fill: currentColor; stroke: none; margin-left: 2px; }
 .video-play:hover .play-btn { transform: scale(1.08); }
 .video-play:focus-visible { outline: 2px solid var(--ring); outline-offset: -2px; }
 .video-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 10px; }

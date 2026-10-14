@@ -102,7 +102,7 @@ function renderVideos() {
         <button class="video-play" aria-label="Play: ${v.title}">
           <img class="thumb-bg" alt="" hidden />
           <img class="thumb" src="https://i.ytimg.com/vi/${id}/hqdefault.jpg" alt="" />
-          <span class="play-btn"><svg class="icon" viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+          <span class="play-btn"><svg class="icon" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 20z"/></svg></span>
         </button>
       </div>
       <div class="video-body">
@@ -111,7 +111,7 @@ function renderVideos() {
           <span class="badge">${v.tag}</span>
           <a href="${v.url}" target="_blank" rel="noopener">
             Watch on YouTube
-            <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M7 17 17 7M7 7h10v10"/></svg>
+            <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
           </a>
         </div>
       </div>`;
