@@ -200,8 +200,78 @@ function setupReveal() {
   els.forEach((el) => io.observe(el));
 }
 
+// Hero name: each letter rolls upward through random capitals and settles, left to right
+function setupMatrixName() {
+  const el = document.querySelector(".matrix");
+  if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const text = el.dataset.text;
+
+  // Screen readers get the plain name; the animated copy is hidden from them
+  const sr = document.createElement("span");
+  sr.className = "sr-only";
+  sr.textContent = text;
+  const visual = document.createElement("span");
+  visual.setAttribute("aria-hidden", "true");
+
+  // Each letter keeps its real (hidden) glyph for layout, with a reel of letters over it
+  const chars = [...text].map((c) => {
+    const ch = document.createElement("span");
+    ch.className = "mx-ch";
+    ch.innerHTML = '<span class="mx-final"></span>';
+    ch.firstChild.textContent = c;
+    visual.appendChild(ch);
+    return ch;
+  });
+  el.replaceChildren(sr, visual);
+
+  const LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const randomLetter = () => LETTERS[Math.floor(Math.random() * LETTERS.length)];
+  const duration = (i) => 900 + i * 130; // ms until letter i settles
+
+  // Capitals are wider than letters like "i" or "."; squeeze them to fit each slot
+  const probe = document.createElement("span");
+  probe.className = "mx-reel";
+  probe.innerHTML = "<span>W</span><span></span>";
+  probe.style.cssText = "visibility:hidden;right:auto";
+  chars[0].appendChild(probe);
+  const capW = probe.firstChild.getBoundingClientRect().width;
+  probe.remove();
+
+  chars.forEach((ch, i) => {
+    const c = ch.firstChild.textContent;
+    if (c === " ") return;
+    const fit = Math.min(1, ch.firstChild.getBoundingClientRect().width / capW);
+    const steps = Math.round(duration(i) / 90); // letters that roll past before settling
+
+    const reel = document.createElement("span");
+    reel.className = "mx-reel";
+    for (let k = 0; k < steps; k++) {
+      const s = document.createElement("span");
+      s.textContent = randomLetter();
+      s.style.setProperty("--sx", fit.toFixed(3));
+      reel.appendChild(s);
+    }
+    const last = document.createElement("span");
+    last.textContent = c; // the real letter sits at the bottom of the reel
+    reel.appendChild(last);
+    ch.appendChild(reel);
+    ch.classList.add("rolling");
+
+    const rowH = last.getBoundingClientRect().height;
+    const roll = reel.animate(
+      [{ transform: "translateY(0)" }, { transform: "translateY(" + -steps * rowH + "px)" }],
+      { duration: duration(i), easing: "cubic-bezier(.25, .6, .3, 1)", fill: "forwards" }
+    );
+    roll.onfinish = () => {
+      reel.remove();
+      ch.classList.replace("rolling", "settled");
+    };
+  });
+}
+
 document.getElementById("year").textContent = new Date().getFullYear();
 renderVideos();
 setupTheme();
 setupCopy();
 setupReveal();
+setupMatrixName();

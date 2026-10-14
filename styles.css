@@ -607,3 +607,28 @@ html .reveal.in { opacity: 1; transform: none; }
   transform: scale(1.25);
 }
 .video-play:hover img.thumb-bg { transform: scale(1.3); }
+
+/* Hero name: each letter rolls upward through random capitals, then settles */
+.matrix { white-space: nowrap; }
+.matrix .mx-ch {
+  position: relative; display: inline-block; white-space: pre;
+  overflow-x: visible; overflow-y: clip; vertical-align: bottom;
+}
+.matrix .mx-ch.rolling .mx-final { visibility: hidden; }
+.matrix .mx-reel { position: absolute; top: 0; left: 0; right: 0; will-change: transform; }
+.matrix .mx-reel span { display: block; text-align: center; }
+.matrix .mx-reel span:not(:last-child) {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 600;
+  color: var(--success);
+  transform: scaleX(var(--sx, 1)); /* squeezed by script to fit narrow letters */
+}
+.matrix .mx-ch.settled .mx-final { animation: mx-settle .5s ease-out; }
+@keyframes mx-settle {
+  from { color: var(--success); text-shadow: 0 0 14px var(--success); }
+  to { text-shadow: 0 0 0 transparent; }
+}
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
